@@ -2,9 +2,11 @@ package com.tbdev.simpleviewpager;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,15 +35,18 @@ class CustomPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-
-        return view==object;
+        Log.e("TOLGAHAN", "isViewFromObject FUNCTION");
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = inflater.inflate(R.layout.tek_satir,container,false);
 
-        ImageView imageView= view.findViewById(R.id.image_item);
+        Log.e("TOLGAHAN", "instantiateItem position :" + position + " resim no:" + (position + 1));
+
+        View view = inflater.inflate(R.layout.tek_satir, container, false);
+
+        ImageView imageView = view.findViewById(R.id.image_item);
         TextView textView = view.findViewById(R.id.tvBaslik);
 
         DataModel gecici = itemList.get(position);
@@ -55,6 +60,9 @@ class CustomPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+        Log.e("TOLGAHAN", "silinen position :" + position + " resim no:" + (position + 1));
+
+        // container=viewpager, object ise tek_satir.xml'in root elementi olan FrameLayout
+        container.removeView((FrameLayout) object);
     }
 }
